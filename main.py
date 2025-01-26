@@ -13,7 +13,7 @@ show_arr = []
 
 mswp.create_playing_field(play_arr)
 mswp.create_playing_field(show_arr)
-mswp.spawn_mines(play_arr, 4)
+mswp.spawn_mines(play_arr, 5)
 mswp.fill_up_board_around_bombs(play_arr)
 
 #== Game Loop ===================================
@@ -30,12 +30,25 @@ while True:
 
     #== Combinations ===============================================
 
-    row = int(input("Enter row: "))
-    if row < 1 or row > mswp.BOARD_LENGTH:
+    row = 0
+    try:
+        row = int(input("Enter row: "))
+    except:
         print("Invalid row number", end="\n\n")
         continue
+
+    if row < 1 or row > mswp.BOARD_LENGTH:
+            print("Invalid row number", end="\n\n")
+            continue
     
-    column = int(input("Enter column: "))
+
+    column = 0
+    try:
+        column = int(input("Enter column: "))
+    except:
+        print("Invalid column number", end="\n\n")
+        continue
+
     if column < 1 or column > mswp.BOARD_LENGTH:
         print("Invalid column number", end="\n\n")
         continue
@@ -44,7 +57,13 @@ while True:
 
     row -= 1
     column -= 1
-    place_flag_var = int(input("Place down a flag: 0 -> false, other -> true: "))
+
+    place_flag_var = 0
+    try:
+        place_flag_var = int(input("Place down a flag: 0 -> false, other_digits -> true: "))
+    except:
+        print("Invalid flag operation", end="\n\n")
+        continue
 
     if place_flag_var != 0:
         if show_arr[row][column] == mswp.CLOSED_SQUARE_EMOJI:
@@ -81,17 +100,3 @@ print("\nActual board:")
 mswp.print_board(play_arr)
 
 print("\n" + line_to_print + "\n")
-
-
-    
-    
-    
-
-
-
-
-
-
-
-    
-    
